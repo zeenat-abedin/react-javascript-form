@@ -12,7 +12,7 @@ export default function HookForm() {
   return (
     <form>
       <h1>Basic Details</h1>
-      <Flex mb={4} gap={4}>
+      <Flex mt={4} gap={4}>
         <FormControl isInvalid={false} isRequired w="50%">
           <FormLabel htmlFor='firstname'>
             First name
@@ -29,9 +29,9 @@ export default function HookForm() {
           <Input id='lastname' placeholder='Enter Last name' bg="#D9D9D9" />
         </FormControl>
       </Flex>
-      <Flex mb={4} gap={4}>
+      <Flex mt={4} gap={4}>
       <FormControl isInvalid={false} isRequired>
-        <FormLabel htmlFor="email">Email address</FormLabel>
+        <FormLabel htmlFor="email">Email</FormLabel>
         <Input id="email" placeholder="Enter Email" name="email" bg="#D9D9D9"/>
           <FormErrorMessage>
             Please enter a valid email address.
@@ -48,7 +48,7 @@ export default function HookForm() {
       </Flex>
 
       <h1>Other Information</h1>
-      <Flex mb={4} gap={4}>
+      <Flex mt={4} gap={4}>
         <FormControl isInvalid={false} flexDir="column">
           <FormLabel htmlFor="gender">Gender</FormLabel>
           <Select placeholder="Select Gender" bg="#D9D9D9">
