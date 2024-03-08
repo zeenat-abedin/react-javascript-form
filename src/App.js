@@ -6,13 +6,12 @@ import theme from './theme'
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign='center' textStyle='h1'>
+      <Box textAlign='center' textStyle='h1' m={4}>
         User Details
       </Box>
       <Box maxW="960px" p={4} mx="auto" bg="#F0EEEE">
       <HookForm/>
-      </Box>
-      
+      </Box>      
     </ChakraProvider>
   )
 }
