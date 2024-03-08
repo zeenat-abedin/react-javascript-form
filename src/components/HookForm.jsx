@@ -51,7 +51,7 @@ export default function HookForm() {
       <Flex mb={4} gap={4}>
         <FormControl isInvalid={false} flexDir="column">
           <FormLabel htmlFor="gender">Select Gender</FormLabel>
-          <Select>
+          <Select bg="#D9D9D9">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
@@ -60,7 +60,7 @@ export default function HookForm() {
 
         <FormControl id="dob" mb="4" isInvalid={false}>
           <FormLabel htmlFor="dob">Date of Birth</FormLabel>
-          <Input placeholder="Select date" size="md" type="date" id="date-of-birth" name="dob" />
+          <Input placeholder="Select date" size="md" type="date" id="date-of-birth" name="dob" bg="#D9D9D9"/>
         </FormControl>
       </Flex>
 
