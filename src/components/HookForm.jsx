@@ -30,15 +30,15 @@ export default function HookForm() {
       <Flex mb={4} gap={4}>
       <FormControl isInvalid={false} isRequired>
         <FormLabel htmlFor="email">Email address</FormLabel>
-        <Input id="email" name="email" bg="#D9D9D9"/>
+        <Input id="email" placeholder="Enter Email" name="email" bg="#D9D9D9"/>
           <FormErrorMessage>
             Please enter a valid email address.
         </FormErrorMessage>
-        </FormControl>
+      </FormControl>
 
       <FormControl isInvalid={false} isRequired>
         <FormLabel htmlFor="phone"> Phone number</FormLabel>
-        <Input id="phone" name="phone" bg="#D9D9D9"/>
+        <Input id="phone" placeholder="Enter Phone" name="phone" bg="#D9D9D9"/>
         <FormErrorMessage>
             Please enter a valid number.
         </FormErrorMessage>
