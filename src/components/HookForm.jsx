@@ -50,8 +50,8 @@ export default function HookForm() {
       <h1>Other Information</h1>
       <Flex mb={4} gap={4}>
         <FormControl isInvalid={false} flexDir="column">
-          <FormLabel htmlFor="gender">Select Gender</FormLabel>
-          <Select bg="#D9D9D9">
+          <FormLabel htmlFor="gender">Gender</FormLabel>
+          <Select placeholder="Select Gender" bg="#D9D9D9">
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
