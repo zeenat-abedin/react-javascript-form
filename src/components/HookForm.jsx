@@ -12,12 +12,13 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
 import { useFieldArray, useForm } from 'react-hook-form'
 
-export default function HookForm() {
+export default function HookForm({handleFormData}) {
   const {
     handleSubmit,
     register,
     control,
-    formState: { errors, isSubmitting } } = useForm({
+    formState: { errors, isSubmitting }
+  } = useForm({
       defaultValues: {
         techStack: [{ name: "" }],
       }
@@ -28,11 +29,20 @@ export default function HookForm() {
     name: "techStack",
   });
 
+  function onSubmit(values) {
+    handleFormData(null)
+    return new Promise((resolve) => {
+      setTimeout(()=>{
+        handleFormData(values)
+        resolve()
+      }, 3000)
+    })   
+  }
   return (
-    <form>
+    <form  onSubmit={handleSubmit(onSubmit)}>
       <h1>Basic Details</h1>
       <Flex mt={4} gap={4}>
-        <FormControl isInvalid={false} isRequired w="50%">
+        <FormControl isInvalid={errors.firstName ? true: undefined} isRequired w="50%">
           <FormLabel htmlFor='firstname'>
             First name
           </FormLabel>
@@ -41,7 +51,7 @@ export default function HookForm() {
             Error message
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={false}  w="50%">
+        <FormControl isInvalid={errors.lastname ? true: undefined} w="50%">
           <FormLabel htmlFor='lastname' >
             Last name
           </FormLabel>
@@ -49,9 +59,15 @@ export default function HookForm() {
         </FormControl>
       </Flex>
       <Flex mt={4} gap={4}>
-      <FormControl isInvalid={false} mb={4}>
+      <FormControl isInvalid={errors.email ? true : undefined} mb={4}>
         <FormLabel htmlFor="email">Email</FormLabel>
-        <Input id="email" placeholder="Enter Email" name="email" bg="#D9D9D9"/>
+        <Input id="email" placeholder="Enter Email" {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Email format is incorrect",
+          },})}              
+          bg="#D9D9D9" />
           <FormErrorMessage>
             Please enter a valid email address.
         </FormErrorMessage>
@@ -86,7 +102,7 @@ export default function HookForm() {
       <FormControl mb="4">
       <Flex direction="row" justifyContent="space-between" alignItems="center" mt={6}>
           <h2>Tech Stack</h2>
-          <IconButton aria-label='Add tech stack' icon={<AddIcon />} mt={4}  variant=" outline" colorScheme="teal" onClick={()=> append({name: ""})} 
+          <IconButton aria-label='Add tech stack' icon={<AddIcon />} mt={4} colorScheme="teal" onClick={()=> append({name: ""})} 
           />
         </Flex>
         <FormControl>
@@ -98,16 +114,21 @@ export default function HookForm() {
                 <Input {...register(`techStack.${index}.name`, {
                  required: 'Techstack is required' 
                 })} bg="#D9D9D9" placeholder='Enter Tech Stack' 
-                  defaultValue={item.name} />               
+                    defaultValue={item.name} />   
+                {
+                index > 0 && (
+                  <IconButton aria-label='Remove field' icon={<MinusIcon />} onClick={() => remove(index)} ml={2} colorScheme='red'/>
+                )
+                }
                 </Flex> 
               </Flex>  
-            )
-          }
+            )           
+          }        
         </FormControl>
       </FormControl>
 
 
-      <Button type="submit">Submit</Button>
+      <Button type="submit" colorScheme='teal'>Submit</Button>
     </form>
   )
 }
