@@ -75,7 +75,17 @@ export default function HookForm({handleFormData}) {
 
       <FormControl isInvalid={false} isRequired>
         <FormLabel htmlFor="phone">Phone number</FormLabel>
-        <Input id="phone" placeholder="Enter Phone" name="phone" bg="#D9D9D9"/>
+          <Input
+            id="phone"
+            placeholder="Enter Phone"
+            {...register("phone", {
+                required: "Mobile number is required",
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Mobile format is incorrect",
+          },
+          })}        
+          bg="#D9D9D9" />
         <FormErrorMessage>
             Please enter a valid number.
         </FormErrorMessage>
