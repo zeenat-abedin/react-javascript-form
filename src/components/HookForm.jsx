@@ -7,6 +7,8 @@ import {
   Button,
   Select,
   IconButton,
+  InputGroup,
+  InputLeftAddon,
 } from '@chakra-ui/react'
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
@@ -74,7 +76,11 @@ export default function HookForm({handleFormData}) {
       </FormControl>
 
       <FormControl isInvalid={false} isRequired>
-        <FormLabel htmlFor="phone">Phone number</FormLabel>
+          <FormLabel htmlFor="phone">Phone</FormLabel>
+          <InputGroup>
+            <InputLeftAddon>
+              +91
+            </InputLeftAddon>
           <Input
             id="phone"
             placeholder="Enter Phone"
@@ -85,7 +91,8 @@ export default function HookForm({handleFormData}) {
                   message: "Mobile format is incorrect",
           },
           })}        
-          bg="#D9D9D9" />
+              bg="#D9D9D9" />
+          </InputGroup>
         <FormErrorMessage>
             Please enter a valid number.
         </FormErrorMessage>
