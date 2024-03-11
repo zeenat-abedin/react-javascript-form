@@ -44,7 +44,7 @@ export default function HookForm({handleFormData}) {
     <form  onSubmit={handleSubmit(onSubmit)}>
       <h1>Basic Details</h1>
       <Flex mt={4} gap={4}>
-        <FormControl isInvalid={errors.firstName ? true: undefined} isRequired w="50%">
+        <FormControl isInvalid={errors.firstName ? true: undefined} w="50%">
           <FormLabel htmlFor='firstname'>
             First name
           </FormLabel>
@@ -75,7 +75,7 @@ export default function HookForm({handleFormData}) {
         </FormErrorMessage>
       </FormControl>
 
-      <FormControl isInvalid={false} isRequired>
+      <FormControl isInvalid={false}>
           <FormLabel htmlFor="phone">Phone</FormLabel>
           <InputGroup>
             <InputLeftAddon>
@@ -110,9 +110,9 @@ export default function HookForm({handleFormData}) {
           </Select>
         </FormControl>
 
-        <FormControl id="dob" mb="4" isInvalid={false}>
+        <FormControl mb="4" isInvalid={false}>
           <FormLabel htmlFor="dob">Date of Birth</FormLabel>
-          <Input placeholder="Select date" size="md" type="date" id="date-of-birth" name="dob" bg="#D9D9D9"/>
+          <Input placeholder="Select date" size="md" type="date" id="dob" bg="#D9D9D9"/>
         </FormControl>
       </Flex>
 

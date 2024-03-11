@@ -1,4 +1,4 @@
-const formValues = {
+export const formValues = {
   firstName: '',
   lastName: '',
   email: '',
