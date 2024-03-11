@@ -26,11 +26,13 @@ function App() {
         User Details
       </Box>
       <Box textStyle="h2" maxW="960px" p={4} mx="auto" bg="#F0EEEE">
-        <HookForm   handleFormData={handleFormData} />
+        <HookForm handleFormData={handleFormData} />
       </Box>
-      {formData && (<Box>
-        <RenderForm textStyle="h2" formData={formData}/>
-      </Box>)}
+      {formData && (
+          <Box textStyle="h2" bg="#F0EEEE" p={6} marginTop={5}>
+            <RenderForm formData={formData} />
+          </Box>
+        )}
     </ChakraProvider>
   )
 }
