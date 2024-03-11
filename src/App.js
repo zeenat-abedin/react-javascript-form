@@ -22,17 +22,19 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box textStyle="h1" textAlign="center" m={4}>
-        User Details
-      </Box>
+      <Box p={4} maxW="960px" mx="auto">
+        <Box textStyle="h1" textAlign="center" m={4}>
+          User Details
+        </Box>
       <Box textStyle="h2" maxW="960px" p={4} mx="auto" bg="#F0EEEE">
         <HookForm handleFormData={handleFormData} />
       </Box>
       {formData && (
-          <Box textStyle="h2" bg="#F0EEEE" p={6} marginTop={5}>
+        <Box textStyle="h2" bg="#F0EEEE" p={6} marginTop={5}>
             <RenderForm formData={formData} />
           </Box>
         )}
+      </Box>
     </ChakraProvider>
   )
 }
