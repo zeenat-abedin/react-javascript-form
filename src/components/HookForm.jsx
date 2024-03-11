@@ -9,6 +9,7 @@ import {
   IconButton,
   InputGroup,
   InputLeftAddon,
+  useToast
 } from '@chakra-ui/react'
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
@@ -31,11 +32,20 @@ export default function HookForm({handleFormData}) {
     name: "techStack",
   });
 
+  const toast = useToast()
+
   function onSubmit(values) {
     handleFormData(null)
     return new Promise((resolve) => {
       setTimeout(()=>{
-        handleFormData(values)
+      handleFormData(values)
+      toast({
+        title: "Form submitted successfully.",
+        description: "We have received your form submission.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
         resolve()
       }, 3000)
     })   

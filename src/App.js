@@ -29,10 +29,10 @@ function App() {
       <Box textStyle="h2" maxW="960px" p={4} mx="auto" bg="#F0EEEE">
         <HookForm handleFormData={handleFormData} />
       </Box>
-      {formData && (
+      {formData && (                 
         <Box textStyle="h2" bg="#F0EEEE" p={6} marginTop={5}>
-            <RenderForm formData={formData} />
-          </Box>
+          <RenderForm formData={formData} />
+        </Box>
         )}
       </Box>
     </ChakraProvider>
