@@ -41,67 +41,102 @@ export default function HookForm({handleFormData}) {
     })   
   }
   return (
-    <form  onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h1>Basic Details</h1>
-      <Flex mt={4} gap={4}>
-        <FormControl isInvalid={errors.firstName ? true: undefined} w="50%">
-          <FormLabel htmlFor='firstname'>
-            First name
-          </FormLabel>
-          <Input id='firstname' placeholder='Enter First name' bg="#D9D9D9" />
+      <Flex
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mt={4}
+        gap={2}
+      >
+        <FormControl isInvalid={errors.firstName ? true : undefined} mb="4">
+          <FormLabel htmlFor="firstName">First name</FormLabel>
+          <Input
+            id="firstName"
+            placeholder="Enter First name"
+            {...register("firstName", {
+              required: "First name is required",
+              minLength: { value: 4, message: "Minimum length should be 4" },
+            })}
+            bg="#D9D9D9"
+          />
           <FormErrorMessage>
-            Error message
+            {errors.firstName && errors.firstName.message}
           </FormErrorMessage>
         </FormControl>
-        <FormControl isInvalid={errors.lastname ? true: undefined} w="50%">
-          <FormLabel htmlFor='lastname' >
-            Last name
-          </FormLabel>
-          <Input id='lastname' placeholder='Enter Last name' bg="#D9D9D9" />
+
+        <FormControl isInvalid={errors.lastName ? true : undefined} mb="4">
+          <FormLabel htmlFor="lastName">Last name</FormLabel>
+          <Input
+            id="lastName"
+            placeholder="Enter Last name"
+            {...register("lastName", {
+              required: "Last name is required",
+              minLength: { value: 2, message: "Minimum length should be 2" },
+            })}
+            bg="#D9D9D9"
+          />
+          <FormErrorMessage>
+            {errors.lastName && errors.lastName.message}
+          </FormErrorMessage>
         </FormControl>
       </Flex>
-      <Flex mt={4} gap={4}>
-      <FormControl isInvalid={errors.email ? true : undefined} mb={4}>
-        <FormLabel htmlFor="email">Email</FormLabel>
-        <Input id="email" placeholder="Enter Email" {...register("email", {
+
+      <Flex
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mt={4}
+        gap={2}
+      >
+        <FormControl isInvalid={errors.email ? true : undefined} mb="4">
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <Input
+            id="email"
+            placeholder="Enter Email"
+            {...register("email", {
               required: "Email is required",
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                 message: "Email format is incorrect",
-          },})}              
-          bg="#D9D9D9" />
+              },
+            })}
+            bg="#D9D9D9"
+          />
           <FormErrorMessage>
-            Please enter a valid email address.
-        </FormErrorMessage>
-      </FormControl>
-
-      <FormControl isInvalid={false}>
+            {errors.email && errors.email.message}
+          </FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={errors.phone ? true : undefined} mb="4">
           <FormLabel htmlFor="phone">Phone</FormLabel>
           <InputGroup>
-            <InputLeftAddon>
-              +91
-            </InputLeftAddon>
-          <Input
-            id="phone"
-            placeholder="Enter Phone"
-            {...register("phone", {
+            <InputLeftAddon>+91</InputLeftAddon>
+            <Input
+              id="phone"
+              placeholder="Enter Phone"
+              {...register("phone", {
                 required: "Mobile number is required",
                 pattern: {
                   value: /^\d{10}$/,
                   message: "Mobile format is incorrect",
-          },
-          })}        
-              bg="#D9D9D9" />
+                },
+              })}
+              bg="#D9D9D9"
+            />
           </InputGroup>
-        <FormErrorMessage>
-            Please enter a valid number.
-        </FormErrorMessage>
-      </FormControl>       
+        </FormControl>
       </Flex>
-
       <h1>Other Information</h1>
-      <Flex mt={4} gap={4}>
-        <FormControl isInvalid={false} flexDir="column">
+
+      <Flex
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mt={4}
+        gap={2}
+      >
+        <FormControl isInvalid={!!errors.gender} mb="4">
           <FormLabel htmlFor="gender">Gender</FormLabel>
           <Select placeholder="Select Gender" bg="#D9D9D9">
             <option value="male">Male</option>
@@ -110,42 +145,79 @@ export default function HookForm({handleFormData}) {
           </Select>
         </FormControl>
 
-        <FormControl mb="4" isInvalid={false}>
-          <FormLabel htmlFor="dob">Date of Birth</FormLabel>
-          <Input placeholder="Select date" size="md" type="date" id="dob" bg="#D9D9D9"/>
+        <FormControl id="dob" mb="4" isInvalid={!!errors.dob}>
+          <FormLabel htmlFor="date-of-birth">Date of Birth</FormLabel>
+          <Input
+            placeholder="Select Date"
+            size="md"
+            type="date"
+            id="date-of-birth"
+            {...register("dob", {
+              required: "Date of birth is required",
+            })}
+            bg="#D9D9D9"
+          />
+          <FormErrorMessage>
+            {errors.dob && errors.dob.message}
+          </FormErrorMessage>
         </FormControl>
       </Flex>
 
-      <FormControl mb="4">
-      <Flex direction="row" justifyContent="space-between" alignItems="center" mt={6}>
-          <h2>Tech Stack</h2>
-          <IconButton aria-label='Add tech stack' icon={<AddIcon />} mt={4} colorScheme="teal" onClick={()=> append({name: ""})} 
-          />
-        </Flex>
-        <FormControl>
-          <FormLabel htmlFor='techStack'>Tech Stack</FormLabel>
-          {
-            fields.map((item, index) => 
-              <Flex key={item.id} direction="column" mb={3}>
+      <Flex
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mt={4}
+        gap={2}
+      >
+        <FormControl id="" mb="4">
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <h2>Tech Stack</h2>
+            <IconButton
+              aria-label="Add tech stack"
+              icon={<AddIcon />}
+              onClick={() => append({ name: "" })}
+              marginTop={4}
+              colorScheme="teal"
+            />
+          </Flex>
+
+          <FormControl isInvalid={errors.techStack ? true : undefined} mb="4">
+            <FormLabel htmlFor="techStack">Tech Stack</FormLabel>
+            {fields.map((item, index) => (
+              <Flex key={item.id} direction={"column"} marginBottom={3}>
                 <Flex>
-                <Input {...register(`techStack.${index}.name`, {
-                 required: 'Techstack is required' 
-                })} bg="#D9D9D9" placeholder='Enter Tech Stack' 
-                    defaultValue={item.name} />   
-                {
-                index > 0 && (
-                  <IconButton aria-label='Remove field' icon={<MinusIcon />} onClick={() => remove(index)} ml={2} colorScheme='red'/>
-                )
-                }
-                </Flex> 
-              </Flex>  
-            )           
-          }        
+                  <Input
+                    {...register(`techStack.${index}.name`, {
+                      required: "Tech stack is required",
+                    })}
+                    bg="#D9D9D9"
+                    placeholder="Enter Tech Stack"
+                    defaultValue={item.name}
+                  />
+                  {index > 0 && (
+                    <IconButton
+                      aria-label="Remove tech stack"
+                      icon={<MinusIcon />}
+                      onClick={() => remove(index)}
+                      colorScheme="red"
+                      marginLeft={2}
+                    />
+                  )}
+                </Flex>
+                <FormErrorMessage>
+                  {errors.techStack?.[index]?.name &&
+                    errors.techStack?.[index]?.name?.message}
+                </FormErrorMessage>
+              </Flex>
+            ))}
+          </FormControl>
         </FormControl>
-      </FormControl>
-
-
-      <Button type="submit" colorScheme='teal'>Submit</Button>
+        <FormControl />
+      </Flex>
+      <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
+        Submit
+      </Button>
     </form>
   )
 }
